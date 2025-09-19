@@ -1,25 +1,24 @@
 // Array para guardar los nombres
 const amigos = [];
 
-const nombreInput = document.getElementById("nombreInput");
-const agregarBtn = document.getElementById("agregarBtn");
-const sortearBtn = document.getElementById("sortearBtn");
-const lista = document.getElementById("lista");
+// Obtener referencias de los elementos
+const inputAmigo = document.getElementById("amigo");
+const listaAmigos = document.getElementById("listaAmigos");
 const resultado = document.getElementById("resultado");
 
-// Función para actualizar la lista en pantalla
+// Función para mostrar la lista de amigos en pantalla
 function mostrarLista() {
-  lista.innerHTML = "";
+  listaAmigos.innerHTML = ""; // Limpiar lista antes de volver a pintar
   amigos.forEach((amigo) => {
     const li = document.createElement("li");
     li.textContent = amigo;
-    lista.appendChild(li);
+    listaAmigos.appendChild(li);
   });
 }
 
-// Evento para agregar un nombre
-agregarBtn.addEventListener("click", () => {
-  const nombre = nombreInput.value.trim();
+// Función para agregar un amigo
+function agregarAmigo() {
+  const nombre = inputAmigo.value.trim();
 
   if (nombre === "") {
     alert("Por favor, escribe un nombre válido.");
@@ -33,12 +32,12 @@ agregarBtn.addEventListener("click", () => {
 
   amigos.push(nombre);
   mostrarLista();
-  nombreInput.value = ""; // limpiar input
-  nombreInput.focus();
-});
+  inputAmigo.value = ""; // limpiar input
+  inputAmigo.focus();
+}
 
-// Evento para sortear un amigo
-sortearBtn.addEventListener("click", () => {
+// Función para sortear un amigo
+function sortearAmigo() {
   if (amigos.length < 5) {
     alert("Debes agregar 5 amigos antes de sortear.");
     return;
@@ -46,5 +45,10 @@ sortearBtn.addEventListener("click", () => {
 
   const indice = Math.floor(Math.random() * amigos.length);
   const amigoSorteado = amigos[indice];
-  resultado.textContent = "🎉 Tu amigo sorteado es: " + amigoSorteado;
-});
+
+  // Limpiar y mostrar resultado
+  resultado.innerHTML = "";
+  const li = document.createElement("li");
+  li.textContent = `🎉 Tu amigo secreto es: ${amigoSorteado}`;
+  resultado.appendChild(li);
+}

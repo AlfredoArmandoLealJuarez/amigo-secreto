@@ -36,6 +36,14 @@ function agregarAmigo() {
   inputAmigo.focus();
 }
 
+//Evento para capturar la tecla Enter en el input y guardar un amigo
+inputAmigo.addEventListener("keypress", function (event){
+  if (event.key == "Enter"){
+    event.preventDefault();
+    agregarAmigo();
+  }
+});
+
 // Función para sortear un amigo
 function sortearAmigo() {
   if (amigos.length < 5) {
@@ -52,3 +60,4 @@ function sortearAmigo() {
   li.textContent = `🎉 Tu amigo secreto es: ${amigoSorteado}`;
   resultado.appendChild(li);
 }
+
